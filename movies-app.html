@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie App</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+<body>
+
+  <form class="movie-form" id="movie-form">
+    <label for="title">Movie Title </label>
+    <input class="title" id="title" name="title" type="text">
+    <label for="rating">Movie Rating</label>
+    <input class="rating" id="rating" name="rating" type="text">
+    <button id="submit-btn">Submit</button>
+  </form>
+
+  <div id="movie-list">
+    <!-- Movie items will be appended here -->
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      // Prevent the default form submission behavior
+      $("#movie-form").submit(function (event) {
+        event.preventDefault();
+
+        // Get the values from the form
+        var title = $("#title").val();
+        var rating = $("#rating").val();
+
+        // Create a new movie item
+        var movieItem = $("<div>");
+        movieItem.append("<strong>Title:</strong> " + title + ", <strong>Rating:</strong> " + rating);
+
+        // Create a remove button
+        var removeButton = $("<button>Delete</button>");
+        removeButton.click(function () {
+          // Remove the corresponding movie item when the button is clicked
+          movieItem.remove();
+        });
+
+        // Append the remove button to the movie item
+        movieItem.append(removeButton);
+
+        // Append the movie item to the movie-list div
+        $("#movie-list").append(movieItem);
+
+        // Clear the form inputs
+        $("#title").val("");
+        $("#rating").val("");
+      });
+
+    });
+  </script>
+</body>
+</html>
